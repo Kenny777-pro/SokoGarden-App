@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:backgroundTint="@color/cardview_dark_background"
+    android:background="@color/material_dynamic_primary0"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About App"
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:background="@drawable/shape"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:padding="5dp"/>
+
+
+    <!--    background shape implementation-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:backgroundTint="@color/black"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/form_bg_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is SokoGarden, i created this appt o learn mor about androind development, i learnt about activities intents adds and many more. Time to create my own."
+            android:background="@drawable/edittext_shape"
+            android:padding="15dp"
+            android:textSize="20sp"
+            android:id="@+id/about_text"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speak Now"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:backgroundTint="#5511D0"
+            android:id="@+id/speak_button"/>
+
+    </LinearLayout>
+</LinearLayout>

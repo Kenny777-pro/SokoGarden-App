@@ -1,24 +1,27 @@
 package com.example.sokogardenapp_kenny
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+
+import android.content.Intent
+import android.util.Log
+import android.view.*
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.json.JSONArray
- 
+import org.json.JSONObject
+
 data class Product(
     val product_id: Int,
     val product_name: String,
     val product_description: String?,
     val product_cost: Int,
-    val product_photo: String?
+    val device_photo: String?
 )
- 
-class ProductAdapter(private val productList: List<Product>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
- 
+
+class ProductAdapter(private var productList: MutableList<Product>) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
+
+    private var fullList: MutableList<Product> = productList.toMutableList()
+
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtName: TextView = itemView.findViewById(R.id.product_name)
         val txtDesc: TextView = itemView.findViewById(R.id.product_description)
@@ -26,60 +29,122 @@ class ProductAdapter(private val productList: List<Product>) :
         val imgProduct: ImageView = itemView.findViewById(R.id.product_photo)
         val btnPurchase: TextView = itemView.findViewById(R.id.purchase)
     }
-    //Access the Layout - Single Item
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.single_item, parent, false)
         return ProductViewHolder(view)
     }
- 
-    //Access Views in Single Item XML and Bind Data
+
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
+
         holder.txtName.text = product.product_name
-        holder.txtDesc.text = product.product_description ?: "No description"
-        holder.txtPrice.text = "Ksh ${product.product_cost}"
-        //Change/Replace modcom2 below to your Python Anywhere username
-        val imageUrl = "https://kennyfungo.alwaysdata.net/static/images/${product.product_photo}"
- 
-        //Load image using Glide, Load Faster with Glide
+        holder.txtDesc.text = product.product_description ?: "No description available"
+        holder.txtPrice.text = "KES ${product.product_cost}"
+
+        // Dynamic Image Retrieval from your AlwaysData server
+        val imageUrl = if (!product.device_photo.isNullOrEmpty()) {
+            val photo = product.device_photo
+            when {
+                photo.startsWith("http") -> photo
+                photo.startsWith("static/") -> "https://kennyfungo.alwaysdata.net/$photo"
+                else -> "https://kennyfungo.alwaysdata.net/static/images/$photo"
+            }
+        } else {
+            null
+        }
+
+        Log.d("ProductAdapter", "Loading image: $imageUrl")
+
         Glide.with(holder.itemView.context)
-            .load(imageUrl )
-            .placeholder(R.drawable.ic_launcher_background) // Make sure you have a placeholder image
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_background)
             .into(holder.imgProduct)
- 
-                //Handle Purchase Button Listener
-                holder.btnPurchase.setOnClickListener {
-                    val context = holder.itemView.context
-                    val intent = android.content.Intent(context, PaymentActivity::class.java).apply {
-                        putExtra("product_id", product.product_id)
-                        putExtra("product_name", product.product_name)
-                        putExtra("product_description", product.product_description)
-                        putExtra("product_cost", product.product_cost)
-                        putExtra("product_photo", product.product_photo)
-                    }
-                    context.startActivity(intent)
-                }
+
+        holder.btnPurchase.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, PaymentActivity::class.java).apply {
+                putExtra("product_id", product.product_id)
+                putExtra("product_name", product.product_name)
+                putExtra("product_description", product.product_description)
+                putExtra("product_cost", product.product_cost)
+                // Use "device_photo" as key to be consistent
+                putExtra("device_photo", product.device_photo)
+            }
+            context.startActivity(intent)
+        }
     }
- 
+
     override fun getItemCount(): Int = productList.size
-   //Return all products Details as a LIST
+
+    // Method to update data safely and refresh fullList for filtering
+    fun updateData(newList: List<Product>) {
+        fullList.clear()
+        fullList.addAll(newList)
+        productList.clear()
+        productList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val results = mutableListOf<Product>()
+                if (constraint.isNullOrEmpty()) {
+                    results.addAll(fullList)
+                } else {
+                    val query = constraint.toString().lowercase().trim()
+                    for (item in fullList) {
+                        if (item.product_name.lowercase().contains(query) ||
+                            item.product_description?.lowercase()?.contains(query) == true) {
+                            results.add(item)
+                        }
+                    }
+                }
+                return FilterResults().apply { values = results }
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                productList.clear()
+                val filtered = results?.values as? List<Product> ?: emptyList()
+                productList.addAll(filtered)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
     companion object {
-        fun fromJsonArray(jsonArray: JSONArray): List<Product> {
+        fun fromJsonArray(jsonArray: JSONArray): MutableList<Product> {
             val list = mutableListOf<Product>()
             for (i in 0 until jsonArray.length()) {
                 val obj = jsonArray.getJSONObject(i)
-                list.add(
-                    Product(
-                        product_id = obj.getInt("device_id"),
-                        product_name = obj.getString("device_name"),
-                        product_description = obj.optString("device_description", ""),
-                        product_cost = obj.getInt("device_cost"),
-                        product_photo = obj.optString("device_photo", "")
-                    )
-                )
+                
+                // Flexible parsing to handle multiple possible key names
+                val id = getInt(obj, "device_id", "product_id", "id")
+                val name = getString(obj, "device_name", "product_name", "name")
+                val desc = getString(obj, "device_description", "product_description", "description")
+                val cost = getInt(obj, "device_cost", "product_cost", "cost")
+                val photo = getString(obj, "device_photo", "product_photo", "photo")
+
+                list.add(Product(id, name, desc, cost, photo))
             }
             return list
+        }
+
+        private fun getString(obj: JSONObject, vararg keys: String): String {
+            for (key in keys) {
+                if (obj.has(key) && !obj.isNull(key)) return obj.optString(key)
+            }
+            return ""
+        }
+
+        private fun getInt(obj: JSONObject, vararg keys: String): Int {
+            for (key in keys) {
+                if (obj.has(key) && !obj.isNull(key)) return obj.optInt(key)
+            }
+            return 0
         }
     }
 }

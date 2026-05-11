@@ -1,113 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@color/navy_blue">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Soko Garden"
-        android:textSize="40sp"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@drawable/shape"
-        android:layout_marginBottom="10dp"/>
-
-<!--    background shape implementation-->
+    <!-- MAIN CONTENT -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:backgroundTint="@color/black"
-        android:background="@drawable/form_bg_shape">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/navy_surface"
+            android:padding="20dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kent Galore"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_tagline"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"
+                android:letterSpacing="0.1"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
+        <!-- SEARCH + MENU BAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
 
-<!--    logout button-->
-    <Button
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/navy_surface"
+                app:queryHint="@string/search_hint"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent"/>
+
+            <ImageButton
+                android:id="@+id/toggleMenu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="12dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/accent_blue"
+                app:tint="@color/white"
+                android:contentDescription="@string/menu_desc"/>
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- PROMO CAROUSEL -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/promoCarousel"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"/>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/carouselIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/promoCarousel"
+                        android:layout_centerHorizontal="true"
+                        android:background="@android:color/transparent"
+                        app:tabBackground="@drawable/dot_selector"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMaxWidth="12dp"
+                        app:tabRippleColor="@null"/>
+                </RelativeLayout>
+
+                <!-- CATEGORIES -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:paddingVertical="8dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnShopNow"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category_all"
+                            app:cornerRadius="12dp"
+                            app:backgroundTint="@color/navy_surface"
+                            android:textColor="@color/white"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPhones"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category_phones"
+                            android:layout_marginStart="8dp"
+                            app:cornerRadius="12dp"
+                            app:backgroundTint="@color/navy_surface"
+                            android:textColor="@color/white"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLaptops"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category_laptops"
+                            android:layout_marginStart="8dp"
+                            app:cornerRadius="12dp"
+                            app:backgroundTint="@color/navy_surface"
+                            android:textColor="@color/white"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnGaming"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category_gaming"
+                            android:layout_marginStart="8dp"
+                            app:cornerRadius="12dp"
+                            app:backgroundTint="@color/navy_surface"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- SECTION TITLE -->
+                <TextView
+                    android:id="@+id/txtTrending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trending_now"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- LOADING -->
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/accent_blue"
+                    android:visibility="gone"/>
+
+                <!-- PRODUCTS GRID -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <!-- OVERLAY -->
+    <View
+        android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log Out"
-        android:backgroundTint="#DE0B1A"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:padding="14sp"
-        android:layout_margin="20dp"
-        android:id="@+id/logout"
+        android:layout_height="match_parent"
+        android:background="#99000000"
         android:visibility="gone"/>
-<!--        Signup Button-->
 
-    <Button
-        android:layout_width="match_parent"
+    <!-- MENU SIDE DRAWER SIMULATION -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/topMenu"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/design_default_color_primary_variant"
-        android:padding="14dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/navy_surface"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="20dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/signup"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:textColor="@color/white"
+                android:gravity="start"
+                android:paddingVertical="12dp"/>
+
+            <Button
+                android:id="@+id/signin"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in"
+                android:textColor="@color/white"
+                android:gravity="start"
+                android:paddingVertical="12dp"/>
+
+            <Button
+                android:id="@+id/about"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_us"
+                android:textColor="@color/white"
+                android:gravity="start"
+                android:paddingVertical="12dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/glass_border"
+                android:layout_marginVertical="8dp"/>
+
+            <Button
+                android:id="@+id/logout"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textColor="#EF4444"
+                android:gravity="start"
+                android:paddingVertical="12dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- FLOATING BUTTON -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:id="@+id/signup"/>
+        android:src="@android:drawable/arrow_up_float"
+        android:visibility="gone"
+        app:backgroundTint="@color/accent_blue"
+        app:tint="@color/white"
+        app:elevation="8dp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/design_default_color_primary_variant"
-        android:padding="14dp"
-        android:layout_margin="20dp"
-        android:id="@+id/signin"/>
-
-</LinearLayout>
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About app"
-        android:layout_margin="20dp"
-        android:padding="14dp"
-        android:backgroundTint="@color/design_default_color_on_secondary"
-        android:textSize="18sp"
-        android:id="@+id/about"/>
-
-
-<!--    Display progressBar when loading products-->
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress"/>
-
-<!--    Loading individual products using the recycler view-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/single_item"
-        android:id="@+id/recyclerview"/>
-
-
-<!--    Developer status-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
-        android:textColor="@color/design_default_color_primary_variant"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:text="Developed by Kenny"/>
-
-
-
-</LinearLayout>
+</FrameLayout>

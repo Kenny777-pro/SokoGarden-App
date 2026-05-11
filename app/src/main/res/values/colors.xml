@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Core Colors -->
+    <color name="black">#0F172A</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Midnight Theme Palette -->
+    <color name="navy_blue">#0F172A</color>
+    <color name="navy_surface">#1E293B</color>
+    <color name="accent_blue">#3B82F6</color>
+    <color name="accent_light">#60A5FA</color>
+    <color name="neon_blue">#00F2FF</color>
+
+    <!-- Status Colors -->
+    <color name="success">#10B981</color>
+    <color name="error">#EF4444</color>
+    <color name="warning">#F59E0B</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_gray">#D1D5DB</color>
+
+    <!-- Translucent overlays -->
+    <color name="glass_white">#1AFFFFFF</color>
+    <color name="glass_border">#33FFFFFF</color>
+
+    <!-- Social Brand Colors -->
+    <color name="google_red">#EA4335</color>
+    <color name="facebook_blue">#1877F2</color>
 </resources>

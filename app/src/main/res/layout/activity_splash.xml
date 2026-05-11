@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient"
+    tools:context=".Splash">
+
+    <!-- Premium Background Layers -->
+    <View
+        android:id="@+id/bg_glow_main"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:alpha="0.15"
+        android:background="@drawable/shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Tech Line Decorations -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:alpha="0.05"
+        android:background="@color/white"
+        android:rotation="45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/decor_top_left"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="-200dp"
+        android:layout_marginTop="-200dp"
+        android:alpha="0.08"
+        android:background="@drawable/shape"
+        android:rotation="30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/decor_bottom_right"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="-100dp"
+        android:layout_marginBottom="-100dp"
+        android:alpha="0.05"
+        android:background="@drawable/shape"
+        android:rotation="-15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/splash_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Logo with Glow Frame -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logo_card"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="80dp"
+            app:cardElevation="25dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/istockphoto" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Brand Title -->
+        <TextView
+            android:id="@+id/app_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.12"
+            android:text="KENT GALORE"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <!-- Slogan -->
+        <TextView
+            android:id="@+id/tagline_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:alpha="0.9"
+            android:letterSpacing="0.35"
+            android:text="ELECTRONICS REDEFINED"
+            android:textAllCaps="true"
+            android:textColor="@color/text_gray"
+            android:textSize="13sp" />
+
+        <!-- Sleek Loading Bar -->
+        <ProgressBar
+            android:id="@+id/splash_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="160dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="64dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progressTint="@color/accent_blue" />
+
+    </LinearLayout>
+
+    <!-- Secure Connection Footer -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:alpha="0.4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:contentDescription="@string/secure_connection"
+            android:src="@android:drawable/ic_lock_idle_lock"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:letterSpacing="0.1"
+            android:text="@string/secure_connection"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,35 +90,42 @@ class ApiHelper(var context: Context) {
         })
     }
 
-fun loadProducts(url: String, recyclerView: RecyclerView, progressBar: ProgressBar? = null) {
-    progressBar?.visibility = View.VISIBLE
-    val layoutManager = LinearLayoutManager(context)
-    recyclerView.layoutManager = layoutManager
-    val client = AsyncHttpClient(true, 80, 443)
+    fun loadProducts(
+        url: String,
+        recyclerView: RecyclerView,
+        progressBar: ProgressBar,
+        onLoaded: (ProductAdapter) -> Unit
+    ) {
+        progressBar.visibility = View.VISIBLE
 
-    client.get(context, url, null, "application/json", object : JsonHttpResponseHandler() {
-        override fun onSuccess(
-            statusCode: Int,
-            headers: Array<out Header>?,
-            response: JSONArray
-        ) {
-            progressBar?.visibility = View.GONE
-             val productList = ProductAdapter.fromJsonArray(response)
-             val adapter = ProductAdapter(productList)
-             recyclerView.adapter = adapter
-        }
+        get(url, object : CallBack {
 
-        override fun onFailure(
-            statusCode: Int,
-            headers: Array<out Header>?,
-            responseString: String?,
-            throwable: Throwable?
-        ) {
-            progressBar?.visibility = View.GONE
-            Toast.makeText(context, "Failed to load products", Toast.LENGTH_SHORT).show()
-        }
-    })
-}
+            override fun onSuccess(result: JSONArray?) {
+                if (result != null) {
+                    val productList = ProductAdapter.fromJsonArray(result)
+
+                    val adapter = ProductAdapter(productList)
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+                    recyclerView.adapter = adapter
+
+                    progressBar.visibility = View.GONE
+
+                    onLoaded(adapter) // 🔥 IMPORTANT
+                }
+            }
+
+            override fun onSuccess(result: JSONObject?) {
+                progressBar.visibility = View.GONE
+                Toast.makeText(context, "Unexpected object response", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(result: String?) {
+                progressBar.visibility = View.GONE
+                Toast.makeText(context, "Failed to load products", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 
     //GET
     fun get(api: String, callBack: CallBack) {

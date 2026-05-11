@@ -4,11 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.sokogardenapp_kenny"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.sokogardenapp_kenny"
@@ -51,4 +47,10 @@ dependencies {
 //    glide dependency implementation
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+    // Volley for networking
+    implementation(libs.volley)
+
+    // Google Play Services for Location
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }

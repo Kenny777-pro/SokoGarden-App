@@ -1,3 +1,104 @@
 <resources>
-    <string name="app_name">SokoGardenApp_Kenny</string>
+    <string name="app_name">Kent Galore</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_kent_galore">Join Kent Galore</string>
+    <string name="sign_up_subtitle">Create your account to start shopping</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="agree_terms">I agree to the Terms of Service</string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_subtitle">Sign in to continue your shopping</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="or">OR</string>
+    <string name="sign_up_social_header">Or continue with</string>
+    <string name="passwords_dont_match">Passwords do not match</string>
+    <string name="agree_terms_error">Please agree to the terms</string>
+    <string name="back">Back</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="biometric_login">Biometric Login</string>
+    <string name="fast_signin">Fast Sign-in</string>
+
+    <!-- Splash Screen Strings -->
+    <string name="splash_tagline">ELECTRONICS REDEFINED</string>
+    <string name="splash_footer">v 1.0 • PREMIUM EXPERIENCE</string>
+    <string name="secure_connection">SECURE &amp; ENCRYPTED</string>
+    <string name="loading_experience">Initializing Experience…</string>
+    <string name="app_logo_description">Kent Galore Logo</string>
+
+    <!-- Main Page Strings -->
+    <string name="main_tagline">The Future of Electronics</string>
+    <string name="search_hint">Search devices…</string>
+    <string name="menu_desc">Menu</string>
+    <string name="category_all">All</string>
+    <string name="category_phones">Phones</string>
+    <string name="category_laptops">Laptops</string>
+    <string name="category_gaming">Gaming</string>
+    <string name="category_tvs">TVs</string>
+    <string name="trending_now">Trending Now</string>
+    <string name="search_results">Search Results for \'%1$s\'</string>
+    <string name="logout">Logout</string>
+
+    <!-- New Modern UI Strings -->
+    <string name="promo_code_new_user">NEW10</string>
+    <string name="promo_label">GET 10% OFF</string>
+    <string name="interests_header">What are you looking for?</string>
+    <string name="interest_phones">Smartphones</string>
+    <string name="interest_laptops">Laptops</string>
+    <string name="interest_gaming">Gaming</string>
+    <string name="interest_audio">Audio</string>
+    <string name="newsletter_signup">Send me tech updates and deals</string>
+    <string name="step_indicator">Step 1 of 2</string>
+
+    <!-- About Page Strings -->
+    <string name="about_us">About Us</string>
+    <string name="about_title">KENT GALORE</string>
+    <string name="about_vision">The Vision Behind Kent Galore</string>
+    <string name="about_description">We are a global leader in providing premium electronics. Our mission is to bridge the gap between innovation and the user experience, bringing the future of technology directly to your doorstep.</string>
+    <string name="listen_story">Listen to our Story</string>
+    <string name="stop_listening">Stop Listening</string>
+    <string name="core_values">OUR CORE VALUES</string>
+    <string name="shipping_title">Global Shipping</string>
+    <string name="shipping_desc">Fast and secure delivery to over 50 countries.</string>
+    <string name="authenticity_title">Authenticity Guaranteed</string>
+    <string name="authenticity_desc">We partner directly with top tech manufacturers.</string>
+    <string name="follow_us">FOLLOW US</string>
+    <string name="about_footer">Kent Galore v1.0.0 • Developed with Passion</string>
+    <string name="our_mission">OUR MISSION</string>
+    <string name="stat_brands_count">50+</string>
+    <string name="stat_brands_label">Brands</string>
+    <string name="stat_customers_count">10K+</string>
+    <string name="stat_customers_label">Customers</string>
+    <string name="stat_support_count">24/7</string>
+    <string name="stat_support_label">Support</string>
+    <string name="twitter">X (Twitter)</string>
+    <string name="instagram">Instagram</string>
+
+    <!-- Payment Page Strings -->
+    <string name="checkout">CHECKOUT</string>
+    <string name="delivery_location">DELIVERY LOCATION</string>
+    <string name="locate_me">Locate Me</string>
+    <string name="locating">Locating address…</string>
+    <string name="tap_to_locate">Tap \'Locate Me\' to set delivery point</string>
+    <string name="mpesa_number">M-PESA Phone Number</string>
+    <string name="complete_purchase">Complete Purchase</string>
+    <string name="payment_initiated">Initiating secure M-PESA payment…</string>
+    <string name="location_denied">Location permission is required for delivery</string>
+    <string name="enter_phone_error">Please enter your M-PESA number</string>
+    <string name="set_location_error">Please set your delivery location</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="total">Total</string>
+    <string name="purchase_now">Purchase Now</string>
+    <string name="premium_electronics">Premium Electronics</string>
+    <string name="delivery_address_hint">Apartment / House / Street</string>
 </resources>
